@@ -1,8 +1,8 @@
 {
-  "name": "idea-app-api",
+  "name": "app-api",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "Jared Bada",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {

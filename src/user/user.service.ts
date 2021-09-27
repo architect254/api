@@ -19,11 +19,11 @@ export class UserService {
   ) {}
 
   async create(credentials: UserDto, currentUser: User): Promise<User> {
-    const { name, email, password } = credentials;
+    const { password } = credentials;
     const user = new User();
 
-    user.name = name;
-    user.email = email;
+    Object.assign(user, credentials);
+
     user.createdBy = currentUser;
     user.salt = await genSalt();
     user.password = await hash(password, user.salt);
@@ -54,11 +54,9 @@ export class UserService {
   }
 
   async update(id, payload: UserDto, currentUser: User): Promise<User> {
-    const { name, email } = payload;
     const user: User = await this.read(id);
 
-    user.name = name || user.name;
-    user.email = email || user.email;
+    Object.assign(user, payload);
     user.updatedBy = currentUser;
 
     return await this.userRepo.save(user);

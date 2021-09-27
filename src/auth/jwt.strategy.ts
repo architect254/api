@@ -28,7 +28,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     const foundUser = await this.userRepo.findOne({ email });
 
     if (!foundUser) {
-      throw new UnauthorizedException('Invalid Credentials');
+      throw new UnauthorizedException('Invalid credentials');
     }
 
     return foundUser;

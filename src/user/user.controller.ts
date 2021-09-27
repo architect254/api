@@ -15,6 +15,7 @@ import { UserService } from './user.service';
 import { UserDto } from './user.dto';
 
 import { GetUser } from 'src/auth/get-user.decorator';
+import { User } from './user.entity';
 
 @UseGuards(AuthGuard('jwt'))
 @Controller('users')
@@ -22,8 +23,8 @@ export class UserController {
   constructor(private userService: UserService) {}
 
   @Post()
-  async createUser(@Body() payload: UserDto, @GetUser('id') userId) {
-    return await this.userService.create(payload, userId);
+  async createUser(@Body() payload: UserDto, @GetUser() currentUser: User) {
+    return await this.userService.create(payload, currentUser);
   }
 
   @Get('/:id')
@@ -43,9 +44,9 @@ export class UserController {
   async updateUser(
     @Param('id') id,
     @Body() payload: UserDto,
-    @GetUser('id') userId,
+    @GetUser() currentUser: User,
   ) {
-    return await this.userService.update(id, payload, userId);
+    return await this.userService.update(id, payload, currentUser);
   }
 
   @Delete('/:id')

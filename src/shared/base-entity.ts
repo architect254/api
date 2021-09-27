@@ -9,7 +9,7 @@ import {
 
 import { User } from '../user/user.entity';
 
-export abstract class BaseEntity {
+export abstract class AbstractEntity {
   @PrimaryGeneratedColumn()
   id?: number;
 

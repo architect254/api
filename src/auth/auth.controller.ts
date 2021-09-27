@@ -30,7 +30,7 @@ export class AuthController {
   ): Promise<{ accessToken: string }> {
     const user = await this.authService.signIn(payload);
     if (!user) {
-      throw new UnauthorizedException('invalid Credentials');
+      throw new UnauthorizedException('Invalid credentials');
     }
     delete user.password && delete user.salt;
     const userPayload: JwtPayload = { user };

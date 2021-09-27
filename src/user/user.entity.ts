@@ -2,10 +2,10 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 import { Exclude } from 'class-transformer';
 
-import { BaseEntity } from 'src/shared/base-entity';
+import { AbstractEntity } from 'src/shared/base-entity';
 
 @Entity()
-export class User extends BaseEntity {
+export class User extends AbstractEntity {
   @PrimaryGeneratedColumn()
   id?: number;
 

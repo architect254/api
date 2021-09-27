@@ -18,14 +18,13 @@ export class UserService {
     private userRepo: Repository<User>,
   ) {}
 
-  async create(credentials: UserDto, createdById): Promise<User> {
+  async create(credentials: UserDto, currentUser: User): Promise<User> {
     const { name, email, password } = credentials;
-    const createdBy: User = await this.read(createdById);
     const user = new User();
 
     user.name = name;
     user.email = email;
-    user.createdBy = createdBy;
+    user.createdBy = currentUser;
     user.salt = await genSalt();
     user.password = await hash(password, user.salt);
 
@@ -54,16 +53,15 @@ export class UserService {
     return await this.userRepo.find({ skip, take: pageSize });
   }
 
-  async update(id, payload: UserDto, updatedById): Promise<User> {
+  async update(id, payload: UserDto, currentUser:User): Promise<User> {
     const { name, email } = payload;
-    const updatedBy = await this.read(updatedById);
     const user: User = await this.read(id);
 
     user.name = name || user.name;
     user.email = email || user.email;
-    user.updatedBy = updatedBy;
+    user.updatedBy = currentUser;
 
-    return await this.save(user);
+    return await this.userRepo.save(user);
   }
 
   async drop(id): Promise<any> {

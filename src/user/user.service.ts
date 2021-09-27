@@ -53,7 +53,7 @@ export class UserService {
     return await this.userRepo.find({ skip, take: pageSize });
   }
 
-  async update(id, payload: UserDto, currentUser:User): Promise<User> {
+  async update(id, payload: UserDto, currentUser: User): Promise<User> {
     const { name, email } = payload;
     const user: User = await this.read(id);
 
@@ -64,7 +64,7 @@ export class UserService {
     return await this.userRepo.save(user);
   }
 
-  async drop(id): Promise<any> {
+  async drop(id): Promise<void> {
     const user: User = await this.read(id);
     const result = await this.userRepo.remove(user);
 
@@ -72,8 +72,6 @@ export class UserService {
       const errorMessage = `failed to delete user:${user.id}`;
       throw new InternalServerErrorException(errorMessage);
     }
-
-    return id;
   }
 
   async save(user: User): Promise<User> {

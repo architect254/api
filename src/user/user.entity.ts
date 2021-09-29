@@ -4,7 +4,7 @@ import { Exclude } from 'class-transformer';
 
 import { AbstractEntity } from 'src/shared/base-entity';
 
-@Entity()
+@Entity('users')
 export class User extends AbstractEntity {
   @PrimaryGeneratedColumn()
   id?: number;

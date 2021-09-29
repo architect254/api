@@ -17,11 +17,10 @@ async function bootstrap() {
 
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
   app.useGlobalPipes(new ValidationPipe());
-  app.setGlobalPrefix('api');
-  
- if(process.env.NODE_ENV === 'development'){
+
+  if (process.env.NODE_ENV === 'development') {
     app.enableCors();
- }
+  }
 
   await app.listen(PORT);
 

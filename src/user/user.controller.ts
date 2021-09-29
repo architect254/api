@@ -21,7 +21,6 @@ import { UserService } from './user.service';
 import { UserDto } from './user.dto';
 import { User } from './user.entity';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { file } from '@babel/types';
 
 let storage = {
   storage: diskStorage({
